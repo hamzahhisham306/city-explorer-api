@@ -1,4 +1,4 @@
-# City Exploer
+# City Exploer-API
 
 ## Author: Hamzah Aldaamas Version: 1.0.0.
 
@@ -8,12 +8,13 @@
 ## Getting Started
 1. build react application UI 
 2. take from form city name.
-3. search in api about city name.
-4. display the conent about city.
+3. sent to server side
+4. then  search in api about city name.
+5. display the conent about city.
 
 
 ## Architecture
-Reactjs, BootStrap, css ,axios, LocationIQ
+Reactjs, BootStrap, css, nodejs, axios
 
 ## Change Log
 
@@ -39,7 +40,19 @@ Start time: 5:00
 
 Finish time: 6:00
 
+
+Actual time needed to complete: 1 hour 
+
+Name of feature: backend
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 6:00
+
+Finish time: 7:00
+
 Actual time needed to complete: 1 hour
+
 
 
 Name of feature: error
