@@ -23,7 +23,6 @@ class  BasicExample extends React.Component{
             datetime2:"",
             description3:"",
             datetime3:"",
-            // wind:"",
             datetime:"",
             show:false,
         }
@@ -39,7 +38,7 @@ class  BasicExample extends React.Component{
     handeSubmit=(event)=>{
         event.preventDefault();
         const city = this.state.city;
-        const url = `http://localhost:3000/weather`;
+        const url = `https://apiback-301.herokuapp.com/weather`;
         const urlMap=`https://maps.locationiq.com/v3/staticmap?key=pk.b4a103b455cdd4e565619a9d076612ae&center=${this.state.lat},${this.state.long}&zoom=10`;
         axios.get(urlMap).then((res)=>{
             console.log(res.config.url)
@@ -53,25 +52,21 @@ class  BasicExample extends React.Component{
             });
         });
         
-        axios.get(url).then((res)=>{
-            let filterres=res.data.filter(item=>{
-                return item.city_name===city;
-            });
-           console.log('c',filterres)
-           console.log('cccc', filterres[0].data[0].weather.description)
-        //    console.log('cccc', filterres[0].data[0].wind_cdir_full)
+        axios.get(`${url}?searchQuery=${city}`).then((res)=>{
+  
+        console.log(res.data.data[0].datetime);
+        console.log(res.data.data[0].weather.description);
+        console.log(res.data.data[0].datetime);
 
-           console.log('cccc', filterres[0].data[0].datetime)
-            const lat=filterres[0].lat;
-            const long=filterres[0].lon;
-            const Name=filterres[0].city_name;
-            const description=filterres[0].data[0].weather.description;
-            const datetime=filterres[0].data[0].datetime;
-            const description2=filterres[0].data[1].weather.description;
-            const datetime2=filterres[0].data[1].datetime;
-            const description3=filterres[0].data[2].weather.description;
-            const datetime3=filterres[0].data[2].datetime;
-            // const wind=filterres[0].data[0].wind_cdir_full;
+            const lat=res.data.lat;
+            const long=res.data.lon;
+            const Name=res.data.city_name;
+            const description=res.data.data[0].weather.description;
+            const datetime=res.data.data[0].datetime;
+            const description2=res.data.data[1].weather.description;
+            const datetime2=res.data.data[1].datetime;
+            const description3=res.data.data[2].weather.description;
+            const datetime3=res.data.data[2].datetime;
             this.setState({
                 lat:lat,
                 long:long,
@@ -82,7 +77,6 @@ class  BasicExample extends React.Component{
                 datetime2:datetime2,
                 description3:description3,
                 datetime3:datetime3,
-                // wind:wind,
                 show:true
             })
         }).catch((error)=>{
@@ -114,11 +108,12 @@ class  BasicExample extends React.Component{
      />
     }
      <div className='content-table1'>
-      <Table name={this.state.Name} long={this.state.long} lat={this.state.lat} urlImage={this.state.urlImage} description={this.state.description}  datetime={this.state.datetime}  description2={this.state.description2}  datetime2={this.state.datetime2}  description3={this.state.description}  datetime3={this.state.datetime3}/>
+      <Table name={this.state.Name} long={this.state.long} lat={this.state.lat} urlImage={this.state.urlImage} description={this.state.description}  datetime={this.state.datetime}  description2={this.state.description2}  datetime2={this.state.datetime2} description3={this.state.description3}  datetime3={this.state.datetime3}/>
      {this.state.show
       && <Card  name={this.state.Name} long={this.state.long} lat={this.state.lat} urlImage={this.state.urlImage}/>
      }
      </div>
+     
    
       </>
       </>
@@ -128,4 +123,3 @@ class  BasicExample extends React.Component{
 }
 }
 export default BasicExample;
-
